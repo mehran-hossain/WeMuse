@@ -1,0 +1,17 @@
+{% extends "music_site/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="welcome">
+    <h6>Hello!</h6>
+    <p>Welcome to WeMuse! Browse thousands of audio tracks to compose your next song. You can choose the genre, instrument, and key you need.
+        Perfect for aspiring musicians as well as experts looking for some inspiration.
+    </p>
+    <form method="post" action="{% url 'upload_list' %}">
+                            {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm"> Browse </button>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "music_site/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="detail">
+<h1> Title: {{ audio.title }} </h1>
+<h3> Genre: {{ audio.genre }}, Instrument: {{audio.instrument}}, Key: {{ audio.key }} </h3>
+<h2>
+    <audio controls>
+        <source src="{{ audio.mp3.url }}" type="audio/mpeg">
+    </audio>
+</h2>
+<!--<h2> <a href="{{ audio.mp3.url }}" class="btn btn-primary btwn-sm"> Download Audio </a>-->
+<!--</h2>-->
+
+<b> Samples Used: </b>
+<table>
+    <tbody>
+    <tr>
+{% for i in sample %}
+    {% if i.main == current_obj %}
+       <b> <a href="{% url 'details' i.sub.pk %}"> {{ i.sub }} | </a> </b>
+
+        <form method="post" action="{% url 'delete_sample' i.pk audio.pk i.sub.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm"> x </button>
+        </form>
+    {% endif %}
+    </tr>
+{% endfor %}
+    <br>
+   <b> Used in: </b>
+    <tr>
+        {% for i in sample %}
+            {% if i.sub == current_obj %}
+               <b> <a href="{% url 'details' i.main.pk %}"> {{ i.main }} | </a> </b>
+            {% endif %}
+
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% if audio.uploader == user %}
+<div class="filter">
+    <form method="get">
+        {{ filter.form }}
+        <button class ="btn btn-primary" type="submit"> Search </button>
+    </form>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Uploader</th>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Times Used</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for upload in filter.qs %}
+                {% if upload.uploader != user%}
+
+                <tr>
+                    <td> {{ upload.uploader }}</td>
+                    <td> <a href="{% url 'details' upload.pk %}"> {{ upload.title }} </a> </td>
+                    <td> {{ upload.genre }}</td>
+                    <td> {{ upload.sample_count }}</td>
+                    <td> <audio controls>
+                        <source src="{{ upload.mp3.url }}" type="audio/mpeg">
+                    </audio>
+                    </td><td>
+                        <form method="post" action="{% url 'add_sample' audio.pk upload.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btwn-sm"> Add </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

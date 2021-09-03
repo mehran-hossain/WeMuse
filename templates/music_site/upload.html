@@ -1,0 +1,16 @@
+{% extends "music_site/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!--    <h2> Upload </h2>-->
+<!--    <form method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        <input type="file" name="document">-->
+<!--        <button type="submit">upload file</button>-->
+<!--    </form>-->
+<h2>Upload File</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+{% endblock %}

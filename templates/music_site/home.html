@@ -1,0 +1,42 @@
+{% extends "music_site/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h2>My Uploads</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Key</th>
+            <th>Instrument</th>
+            <th>Times Used</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for upload in uploads %}
+            <tr>
+                <td> <a href="{% url 'details' upload.pk %}"> {{ upload.title }} </a> </td>
+                <td> {{ upload.genre }} </td>
+                <td> {{ upload.key }}</td>
+                <td> {{ upload.instrument }}
+                </td>
+                <td> {{ upload.sample_count }}</td>
+                <td> <audio controls>
+                    <source src="{{ upload.mp3.url }}" type="audio/mpeg">
+                </audio>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'delete' upload.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm"> X </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

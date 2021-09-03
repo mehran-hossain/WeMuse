@@ -1,0 +1,15 @@
+{% extends "music_site/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <form class="w-50 ml-3 mb-2" method = "POST">
+            {% csrf_token %}
+            <fieldset class = "form-group">
+                <legend class ="border-bottom mb-2">Profile Info</legend>
+                {{ u_form|crispy }}
+            </fieldset>
+            <div>
+                <button class="btn btn-outline-info mb-2" type = "submit">Update</button>
+            </div>
+            <a href="{% url 'password' %}"> Reset password? </a>
+        </form>
+{% endblock %}

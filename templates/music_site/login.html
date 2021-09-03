@@ -1,0 +1,15 @@
+{% extends "music_site/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <body>
+        <div class="content">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div>
+                    <button type = "submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </form>
+        </div>
+    </body>
+{% endblock content %}
