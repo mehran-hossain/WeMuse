@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from musix.models import Audio, Sample
 
 
-class UserRegisterFrom(UserCreationForm):
+class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
     class Meta:

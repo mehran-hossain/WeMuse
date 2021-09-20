@@ -20,7 +20,7 @@ class Audio(models.Model):
     instrument = models.CharField(max_length=100, choices=INSTRUMENTS, default="Guitar")
     key = models.CharField(max_length=100, choices=KEY_CHOICES, default="A")
     mp3 = models.FileField(upload_to='audio/mp3s/')
-    sample_count = models.IntegerField(max_length=100, default=0)
+    sample_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from .filters import AudioFilter
-from .forms import UserRegisterFrom, UserUpdateForm, AudioUploadForm
+from .forms import UserRegisterForm, UserUpdateForm, AudioUploadForm
 from musix.models import Audio, Sample
 from django.contrib.auth.models import User
 
@@ -20,14 +20,14 @@ def home(request):
 
 def register(request):
     if request.method == "POST":
-        form = UserRegisterFrom(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}')
             return redirect('login')
     else:
-        form = UserRegisterFrom()
+        form = UserRegisterForm()
     return render(request, "music_site/register.html", {'form': form})
 
 

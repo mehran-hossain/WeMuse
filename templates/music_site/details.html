@@ -18,11 +18,11 @@
     <tr>
 {% for i in sample %}
     {% if i.main == current_obj %}
-       <b> <a href="{% url 'details' i.sub.pk %}"> {{ i.sub }} | </a> </b>
+       <b> <a href="{% url 'details' i.sub.pk %}"> {{ i.sub }} </a> </b>
 
         <form method="post" action="{% url 'delete_sample' i.pk audio.pk i.sub.pk %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm"> x </button>
+            <button type="submit" class="btn btn-danger btn-sm"> x </button> |
         </form>
     {% endif %}
     </tr>
@@ -53,6 +53,7 @@
             <tr>
                 <th>Uploader</th>
                 <th>Title</th>
+                <th>Instrument</th>
                 <th>Genre</th>
                 <th>Times Used</th>
             </tr>
@@ -64,6 +65,7 @@
                 <tr>
                     <td> {{ upload.uploader }}</td>
                     <td> <a href="{% url 'details' upload.pk %}"> {{ upload.title }} </a> </td>
+                    <td> {{upload.instrument}}</td>
                     <td> {{ upload.genre }}</td>
                     <td> {{ upload.sample_count }}</td>
                     <td> <audio controls>
