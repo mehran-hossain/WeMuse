@@ -48,6 +48,28 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'music_site/register.html')
 
+    def test_register_POST(self):
+        client = Client()
+        user = {
+            'username': 'merab10',
+            'email': 'merabul@gmail.com',
+            'password1': 'catdog619',
+            'password2': 'catdog619'
+        }
+        response = client.post(reverse('register'), data=user)
+        self.assertEqual(response.status_code, 302)
+
+    def test_register_POST_fail(self):
+        client = Client()
+        user = {
+            'username': 'merab10',
+            'email': 'merabul@gmail.com',
+            'password1': 'password',
+            'password2': 'catdog619'
+        }
+        response = client.post(reverse('register'), data=user)
+        self.assertEqual(response.status_code, 302)
+
 
 class TestModels(TestCase):
     def setUp(self):
@@ -56,7 +78,13 @@ class TestModels(TestCase):
 
     def test_audio_create(self):
         audio = Audio.objects.create(uploader=self.user, title='Title', genre='Genre', instrument='Guitar', key='A',
-                                     mp3=SimpleUploadedFile("test,txt,", ""), sample_count=0)
+                                     mp3=SimpleUploadedFile("test.mp3", ""), sample_count=0)
+        self.assertTrue(isinstance(audio, Audio))
+        self.assertEqual(audio.title, 'Title')
+
+    def test_audio_create_fail(self):
+        audio = Audio.objects.create(title='Title', genre='Genre', instrument='Guitar', key='A',
+                                     mp3=SimpleUploadedFile("test.mp3", ""), sample_count=0)
         self.assertTrue(isinstance(audio, Audio))
         self.assertEqual(audio.title, 'Title')
 
