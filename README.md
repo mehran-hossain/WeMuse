@@ -6,3 +6,5 @@ Basic website built using html and css on the frontend and django on the backend
 ![image](https://user-images.githubusercontent.com/56358766/191389082-82bc8877-7d65-4a17-85a1-7a5812b7adbd.png)
 
 ![image](https://user-images.githubusercontent.com/56358766/191389136-d847c04d-391c-4156-8113-2ab89295be52.png)
+
+![image](https://user-images.githubusercontent.com/56358766/191389332-1edc5ee0-e7c7-40a9-82aa-8a9c47402ec0.png)
