@@ -1,0 +1,2 @@
+# Django-website-project
+Basic website built using html and css on the frontend and django on the backend. Song-making usually requires different instruments/vocals at specific keys and tempos. The idea behind the website is to have a library where musicians can search for and upload audio clips in a specific key/bpm for song-making. Users can add contributors to their uploads for collaborated works.
